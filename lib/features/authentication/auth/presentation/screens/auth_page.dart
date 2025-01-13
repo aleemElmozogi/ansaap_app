@@ -19,6 +19,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 part '../listeners/sign_in_listener.dart';
+part 'widgets/gust_button.dart';
+part 'widgets/signup_button.dart';
+part 'widgets/signin_button.dart';
+part 'widgets/forgot_password_button.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -67,58 +71,11 @@ class LoginScreen extends StatelessWidget {
                         prefixIcon: Icons.lock_rounded,
                       ),
                       SizedBox(height: 25.h),
-                      BlocBuilder<AuthCubit, AuthState>(
-                        buildWhen: (previous, current) =>
-                            previous.signInStatus != current.signInStatus,
-                        builder: (context, state) {
-                          return state.signInStatus.isInProgress
-                              ? const Center(child: AppLoadingIndicator())
-                              : AppButton(
-                                  title: "تسجيل الدخول",
-                                  onTab: () {
-                                    if (_formKey.currentState!
-                                        .saveAndValidate()) {
-                                      final creeds =
-                                          _formKey.currentState?.input;
-                                      if (creeds != null) {
-                                        context.read<AuthCubit>().login(
-                                            creeds.phone, creeds.password);
-                                      }
-                                    }
-                                  });
-                        },
-                      ),
+                      _SignInButton(formKey: _formKey),
                       SizedBox(height: 25.h),
-                      InkWell(
-                        onTap: () => context.router.push(PhoneInputRoute(
-                            onSuccess: (v) =>
-                                context.router.push(ResetPasswordRoute()))),
-                        child: AppText(
-                          'نسيت كلمة السر؟',
-                          textColor: AppColors.primary,
-                          fontSize: 15.sp,
-                        ),
-                      ),
+                      _ForgotPasswordButton(),
                       SizedBox(height: 25.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppText(
-                            'ليس لديك حساب؟  ',
-                            fontSize: 15.sp,
-                          ),
-                          InkWell(
-                            onTap: () => context.router.push(PhoneInputRoute(
-                                onSuccess: (v) => context.router
-                                    .push(RegisterRoute(phoneNumber: v)))),
-                            child: AppText(
-                              'التسجيل',
-                              fontSize: 15.sp,
-                              textColor: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
+                      _SignUpButton(),
                       SizedBox(height: 20.h),
                       Row(
                         children: [
@@ -141,20 +98,7 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 20.h),
-                      AppCustomButton(
-                          child: SizedBox(
-                            width: 1.sw,
-                            height: 40.h,
-                            child: Center(
-                              child: AppText(
-                                'الدخول كزائر',
-                                textColor: AppColors.primary,
-                                fontSize: 15.sp,
-                              ),
-                            ),
-                          ),
-                          onPressed: () =>
-                              context.router.replaceAll([const MainRoute()])),
+                      _GustButton(),
                       SizedBox(height: 50.h),
                       InkWell(
                           onTap: () => AppLauncher().callPhoneNumber(),

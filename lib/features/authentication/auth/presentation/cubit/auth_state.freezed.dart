@@ -20,6 +20,7 @@ mixin _$AuthState {
   UserContentModel? get userEntity => throw _privateConstructorUsedError;
   AuthStatus get authState => throw _privateConstructorUsedError;
   CallStatus get signInStatus => throw _privateConstructorUsedError;
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -37,7 +38,8 @@ abstract class $AuthStateCopyWith<$Res> {
       {String message,
       UserContentModel? userEntity,
       AuthStatus authState,
-      CallStatus signInStatus});
+      CallStatus signInStatus,
+      ThemeMode themeMode});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? userEntity = freezed,
     Object? authState = null,
     Object? signInStatus = null,
+    Object? themeMode = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
@@ -77,6 +80,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.signInStatus
           : signInStatus // ignore: cast_nullable_to_non_nullable
               as CallStatus,
+      themeMode: null == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
     ) as $Val);
   }
 }
@@ -93,7 +100,8 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       {String message,
       UserContentModel? userEntity,
       AuthStatus authState,
-      CallStatus signInStatus});
+      CallStatus signInStatus,
+      ThemeMode themeMode});
 }
 
 /// @nodoc
@@ -113,6 +121,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? userEntity = freezed,
     Object? authState = null,
     Object? signInStatus = null,
+    Object? themeMode = null,
   }) {
     return _then(_$AuthStateImpl(
       message: null == message
@@ -131,6 +140,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.signInStatus
           : signInStatus // ignore: cast_nullable_to_non_nullable
               as CallStatus,
+      themeMode: null == themeMode
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
     ));
   }
 }
@@ -142,7 +155,8 @@ class _$AuthStateImpl implements _AuthState {
       {this.message = '',
       this.userEntity,
       this.authState = AuthStatus.unAuthenticated,
-      this.signInStatus = CallStatus.pure});
+      this.signInStatus = CallStatus.pure,
+      this.themeMode = ThemeMode.light});
 
   @override
   @JsonKey()
@@ -155,10 +169,13 @@ class _$AuthStateImpl implements _AuthState {
   @override
   @JsonKey()
   final CallStatus signInStatus;
+  @override
+  @JsonKey()
+  final ThemeMode themeMode;
 
   @override
   String toString() {
-    return 'AuthState(message: $message, userEntity: $userEntity, authState: $authState, signInStatus: $signInStatus)';
+    return 'AuthState(message: $message, userEntity: $userEntity, authState: $authState, signInStatus: $signInStatus, themeMode: $themeMode)';
   }
 
   @override
@@ -172,12 +189,14 @@ class _$AuthStateImpl implements _AuthState {
             (identical(other.authState, authState) ||
                 other.authState == authState) &&
             (identical(other.signInStatus, signInStatus) ||
-                other.signInStatus == signInStatus));
+                other.signInStatus == signInStatus) &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, message, userEntity, authState, signInStatus);
+  int get hashCode => Object.hash(
+      runtimeType, message, userEntity, authState, signInStatus, themeMode);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -193,7 +212,8 @@ abstract class _AuthState implements AuthState {
       {final String message,
       final UserContentModel? userEntity,
       final AuthStatus authState,
-      final CallStatus signInStatus}) = _$AuthStateImpl;
+      final CallStatus signInStatus,
+      final ThemeMode themeMode}) = _$AuthStateImpl;
 
   @override
   String get message;
@@ -203,6 +223,8 @@ abstract class _AuthState implements AuthState {
   AuthStatus get authState;
   @override
   CallStatus get signInStatus;
+  @override
+  ThemeMode get themeMode;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

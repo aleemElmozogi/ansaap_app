@@ -1,3 +1,5 @@
+import 'package:ansaap_app/features/authentication/auth/presentation/cubit/auth_cubit.dart';
+import 'package:ansaap_app/features/authentication/auth/presentation/cubit/auth_state.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:ansaap_app/config/routes/app_router.dart';
 import 'package:ansaap_app/core/utils/app_colors.dart';
@@ -6,6 +8,7 @@ import 'package:ansaap_app/core/widgets/app_text.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:ansaap_app/core/di/injection.dart' as di;
 
@@ -28,7 +31,49 @@ class MainScreen extends StatelessWidget {
           tabsRouter.current.title;
           return AppScaffold(
               title: taps[tabsRouter.activeIndex]['title'].toString(),
-              drawer: const Drawer(),
+              drawer: Drawer(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DrawerHeader(
+                      decoration: BoxDecoration(),
+                      child: AppText(
+                        'أَنْسَابْ',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.sp,
+                        textColor: AppColors.primary,
+                      ),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.nightlight_outlined),
+                      title: AppText(
+                        'الوضع الليلي',
+                        textAlign: TextAlign.start,
+                      ),
+                      trailing: BlocBuilder<AuthCubit, AuthState>(
+                        buildWhen: (previous, current) =>
+                            previous.themeMode != current.themeMode,
+                        builder: (context, state) {
+                          return Switch(
+                            value: state.themeMode == ThemeMode.dark,
+                            onChanged: (value) =>
+                                context.read<AuthCubit>().swishAppThemeMode(),
+                          );
+                        },
+                      ),
+                      onTap: context.read<AuthCubit>().swishAppThemeMode,
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.logout_outlined),
+                      title: AppText(
+                        'تسجيل الخروج',
+                        textAlign: TextAlign.start,
+                      ),
+                      onTap: context.read<AuthCubit>().logOut,
+                    ),
+                  ],
+                ),
+              ),
               safeTopArea: true,
               actions: [],
               bottomNavigation: FlashyTabBar(

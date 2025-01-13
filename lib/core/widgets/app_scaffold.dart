@@ -1,7 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ansaap_app/core/utils/app_colors.dart';
 import 'package:ansaap_app/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/single_child_widget.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget body;
@@ -23,8 +24,8 @@ class AppScaffold extends StatelessWidget {
   final bool safeTopArea;
   final bool safeBottomArea;
   final bool extendBodyBehindAppBar;
-  final List<BlocListener> listenersList;
-  final List<BlocProvider> providersList;
+  final List<SingleChildWidget> listenersList;
+  final List<SingleChildWidget> providersList;
   final GlobalKey<ScaffoldState>? scaffoldKey;
 
   const AppScaffold(
@@ -127,17 +128,17 @@ class AppScaffold extends StatelessWidget {
                   padding: contentPadding,
                   child: providersList.isNotEmpty
                       ? MultiBlocProvider(
-                          providers: [...providersList],
+                          providers: providersList,
                           child: listenersList.isNotEmpty
                               ? MultiBlocListener(
-                                  listeners: [...listenersList],
+                                  listeners: listenersList,
                                   child: body,
                                 )
                               : body,
                         )
                       : listenersList.isNotEmpty
                           ? MultiBlocListener(
-                              listeners: [...listenersList],
+                              listeners: listenersList,
                               child: body,
                             )
                           : body,

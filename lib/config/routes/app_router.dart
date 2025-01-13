@@ -47,7 +47,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: OtpInputRoute.page),
     AutoRoute(page: ResetPasswordRoute.page),
 
-
     AutoRoute(page: MainRoute.page, children: [
       AutoRoute(page: HomeRoute.page),
       AutoRoute(page: ProfileRoute.page),

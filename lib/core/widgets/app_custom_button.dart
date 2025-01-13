@@ -5,14 +5,18 @@ import '../utils/app_colors.dart';
 
 class AppCustomButton extends StatelessWidget {
   final Widget child;
+  final double borderWidth;
   final Color? backgroundColor;
+  final Color borderColor;
   final EdgeInsets? contentPadding;
   final Function() onPressed;
   const AppCustomButton({
     super.key,
     required this.child,
+    this.borderColor = AppColors.grey,
     required this.onPressed,
     this.contentPadding,
+    this.borderWidth = 1.0,
     this.backgroundColor,
   });
 
@@ -27,7 +31,7 @@ class AppCustomButton extends StatelessWidget {
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(7.r),
-                  side: const BorderSide(color: AppColors.grey)))),
+                  side: BorderSide(color: borderColor, width: borderWidth)))),
       onPressed: onPressed,
       child: child,
     );
