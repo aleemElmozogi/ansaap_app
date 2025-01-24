@@ -5,12 +5,14 @@ class _ListItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.vector,
+    this.vector,
+    this.imagePath = '',
     required this.onPressed,
   });
 
   final String title;
-  final String vector;
+  final String? vector;
+  final String imagePath;
   final String description;
   final VoidCallback onPressed;
   @override
@@ -43,10 +45,16 @@ class _ListItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(10.0.r),
-              child: SvgPicture.asset(
-                vector,
-                height: 70.h,
-              ),
+              child: vector == null
+                  ? Image.asset(
+                      imagePath,
+                      height: 70.h,
+                      color: AppColors.grey,
+                    )
+                  : SvgPicture.asset(
+                      vector ?? '',
+                      height: 70.h,
+                    ),
             ),
           ],
         ));

@@ -9,6 +9,7 @@ class ImgAssets {
   static const String searchVector = "$iconPath/search_icon.svg";
   static const String requestVector = "$iconPath/request_icon.svg";
   static const String libyaVector = "$iconPath/libya_map.svg";
+  static const String libyaMapIcon = "$iconPath/libya_map.png";
   static const String homeHeader = "$imgPath/homeHeader.png";
 
   static const String tree = "$imgPath/tree.png";

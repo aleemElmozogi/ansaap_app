@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsIconsLibyaMap = 'assets/icons/libya_map.svg';
   static const String fontsTajawalBlack = 'assets/fonts/Tajawal-Black.ttf';
   static const String fontsTajawalBold = 'assets/fonts/Tajawal-Bold.ttf';
   static const String fontsTajawalExtraBold = 'assets/fonts/Tajawal-ExtraBold.ttf';
@@ -10,7 +11,7 @@ class Assets {
   static const String fontsTajawalMedium = 'assets/fonts/Tajawal-Medium.ttf';
   static const String fontsTajawalRegular = 'assets/fonts/Tajawal-Regular.ttf';
   static const String iconsImg = 'assets/icons/img.png';
-  static const String iconsLibyaMap = 'assets/icons/libya_map.svg';
+  static const String iconsLibyaMap = 'assets/icons/libya_map.png';
   static const String iconsRequestIcon = 'assets/icons/request_icon.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';
   static const String iconsTree = 'assets/icons/tree.svg';

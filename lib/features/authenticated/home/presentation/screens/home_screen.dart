@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               title: 'عرض العائلات',
               description:
                   'عرض جميع شجرات العائلات المسجلة لاستكشاف الروابط العائلية.',
-              vector: ImgAssets.treeVector,
+              imagePath: ImgAssets.libyaMapIcon,
               onPressed: () {
                 context.showAppBottomSheet(
                     child: BlocProvider.value(
