@@ -1,7 +1,7 @@
-part of '../auth_page.dart';
+part of '../send_suggestion_screen.dart';
 
-class _SignInButton extends StatelessWidget {
-  const _SignInButton({
+class _SendSuggestionButton extends StatelessWidget {
+  const _SendSuggestionButton({
     super.key,
     required GlobalKey<FormBuilderState> formKey,
   }) : _formKey = formKey;
@@ -10,21 +10,21 @@ class _SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<SendSuggestionCubit, SendSuggestionState>(
       buildWhen: (previous, current) =>
-          previous.signInStatus != current.signInStatus,
+          previous.sendSuggestionsStatus != current.sendSuggestionsStatus,
       builder: (context, state) {
-        return state.signInStatus.isInProgress
+        return state.sendSuggestionsStatus.isInProgress
             ? const Center(child: AppLoadingIndicator())
             : AppButton(
-                title: "تسجيل الدخول",
+                title: "إرسال",
                 onTab: () {
                   if (_formKey.currentState!.saveAndValidate()) {
                     final creeds = _formKey.currentState?.input;
                     if (creeds != null) {
                       context
-                          .read<AuthCubit>()
-                          .login(creeds.userName, creeds.password);
+                          .read<SendSuggestionCubit>()
+                          .sendSuggestion(creeds.suggestion);
                     }
                   }
                 });

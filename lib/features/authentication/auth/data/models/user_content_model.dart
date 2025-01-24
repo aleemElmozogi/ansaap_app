@@ -6,22 +6,21 @@ part 'user_content_model.g.dart';
 @JsonSerializable()
 class UserContentModel extends JsonModel<UserContentModel> {
   @JsonKey(name: 'fullName', defaultValue: '')
+  final String? fullName;
+  @JsonKey(name: 'userName', defaultValue: '')
   final String? userName;
   @JsonKey(name: 'email', defaultValue: '')
   final String? userEmail;
-  @JsonKey(name: 'imageUrl', defaultValue: '')
-  final String? profileImageUrl;
+
   @JsonKey(name: 'phoneNumber', defaultValue: '')
   final String? phoneNumber;
-  @JsonKey(name: 'walletTotal', defaultValue: 0)
-  final num? walletTotal;
+
 
   UserContentModel({
-    this.userName,
+    this.fullName,
     this.userEmail,
-    this.profileImageUrl,
     this.phoneNumber,
-    this.walletTotal,
+    this.userName,
   });
 
   factory UserContentModel.fromJson(Map<String, dynamic> json) =>
@@ -36,5 +35,5 @@ class UserContentModel extends JsonModel<UserContentModel> {
 
   @override
   List<Object?> get props =>
-      [userEmail, userName, walletTotal, profileImageUrl, phoneNumber];
+      [userEmail, fullName,  phoneNumber,userName];
 }

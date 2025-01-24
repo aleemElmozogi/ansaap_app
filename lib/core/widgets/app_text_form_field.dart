@@ -9,6 +9,7 @@ class AppTextFormField extends StatefulWidget {
   final bool isPassword;
   final Function(String)? onChanged;
   final int? maxLength;
+  final int? maxLines;
   final String? labelText;
   final String? description;
   final String? hintText;
@@ -22,6 +23,7 @@ class AppTextFormField extends StatefulWidget {
     this.isPassword = false,
     this.labelText,
     this.hintText,
+    this.maxLines,
     this.validator,
     this.initalValue,
     this.onChanged,
@@ -54,6 +56,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             maxLength: widget.maxLength,
             initialValue: widget.initalValue,
             validator: widget.validator,
+            maxLines: widget.maxLines,
             onChanged: (v) {
               if (widget.onChanged != null) {
                 widget.onChanged!(v ?? '');

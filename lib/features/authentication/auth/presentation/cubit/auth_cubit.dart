@@ -43,10 +43,10 @@ class AuthCubit extends Cubit<AuthState> {
     ));
   }
 
-  Future<void> login(String phone, String password) async {
+  Future<void> login(String userName, String password) async {
     emit(state.copyWith(signInStatus: CallStatus.inProgress));
     final response =
-        await _authUsecase(LoginRequest(password: password, phone: phone));
+        await _authUsecase(LoginRequest(password: password, userName: userName));
     response.fold(
         (failure) => emit(state.copyWith(
             signInStatus: CallStatus.failed,

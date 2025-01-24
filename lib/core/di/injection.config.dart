@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../config/routes/app_router.dart' as _i20;
 import '../../data/repositories/auth_repository.dart' as _i481;
+import '../../data/repositories/inquiries_repository.dart' as _i325;
 import '../../data/repositories/notifications_repository.dart' as _i1061;
 import '../../data/repositories/otp_repository.dart' as _i640;
 import '../../data/services/fcm_service.dart' as _i1036;
@@ -35,6 +36,16 @@ import '../../data/usecases/notifications/subscribe_topic_usecase.dart'
     as _i794;
 import '../../data/usecases/notifications/unsubscribe_topic_usecase.dart'
     as _i500;
+import '../../features/authenticated/sendSuggestion/domain/usecases/send_suggestion_usecase.dart'
+    as _i494;
+import '../../features/authenticated/sendSuggestion/presentation/cubit/send_suggestion_cubit.dart'
+    as _i947;
+import '../../features/authenticated/viewFamilies/domain/usecases/fetch_cities_usecase.dart'
+    as _i1027;
+import '../../features/authenticated/viewFamilies/domain/usecases/fetch_families_usecase.dart'
+    as _i499;
+import '../../features/authenticated/viewFamilies/presentation/cubit/view_families_cubit.dart'
+    as _i738;
 import '../../features/authentication/auth/domain/usecases/auth_usecase.dart'
     as _i298;
 import '../../features/authentication/auth/presentation/cubit/auth_cubit.dart'
@@ -132,6 +143,11 @@ extension GetItInjectableX on _i174.GetIt {
         _i794.SubscribeTopicUsecase(gh<_i1061.NotificationsRepository>()));
     gh.lazySingleton<_i322.StoreTokenUsecase>(
         () => _i322.StoreTokenUsecase(gh<_i1061.NotificationsRepository>()));
+    gh.singleton<_i325.InquiriesRepository>(() => _i325.InquiriesRepositoryImpl(
+          localStorage: gh<_i198.LocalStorage>(),
+          apiConsumer: gh<_i207.ApiConsumer>(),
+          networkInfo: gh<_i932.NetworkInfo>(),
+        ));
     gh.singleton<_i481.AuthRepository>(() => _i481.AuthRepositoryImpl(
           localStorage: gh<_i198.LocalStorage>(),
           apiConsumer: gh<_i207.ApiConsumer>(),
@@ -166,9 +182,29 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i298.AuthUsecase>(),
           gh<_i198.LocalStorage>(),
         ));
+    gh.lazySingleton<_i499.FetchFamiliesUsecase>(
+        () => _i499.FetchFamiliesUsecase(
+              inquiriesRepository: gh<_i325.InquiriesRepository>(),
+              networkInfo: gh<_i932.NetworkInfo>(),
+            ));
+    gh.lazySingleton<_i1027.FetchCitiesUsecase>(() => _i1027.FetchCitiesUsecase(
+          inquiriesRepository: gh<_i325.InquiriesRepository>(),
+          networkInfo: gh<_i932.NetworkInfo>(),
+        ));
+    gh.lazySingleton<_i494.SendSuggestionUsecase>(
+        () => _i494.SendSuggestionUsecase(
+              inquiriesRepository: gh<_i325.InquiriesRepository>(),
+              networkInfo: gh<_i932.NetworkInfo>(),
+            ));
     gh.factory<_i258.LocaleCubit>(() => _i258.LocaleCubit(
           getSavedLangUseCase: gh<_i586.GetSavedLangUseCase>(),
           changeLangUseCase: gh<_i92.ChangeLangUseCase>(),
+        ));
+    gh.lazySingleton<_i947.SendSuggestionCubit>(
+        () => _i947.SendSuggestionCubit(gh<_i494.SendSuggestionUsecase>()));
+    gh.lazySingleton<_i738.ViewFamiliesCubit>(() => _i738.ViewFamiliesCubit(
+          gh<_i499.FetchFamiliesUsecase>(),
+          gh<_i1027.FetchCitiesUsecase>(),
         ));
     return this;
   }

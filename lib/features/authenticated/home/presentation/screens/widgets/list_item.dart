@@ -6,16 +6,19 @@ class _ListItem extends StatelessWidget {
     required this.title,
     required this.description,
     required this.vector,
+    required this.onPressed,
   });
 
   final String title;
   final String vector;
   final String description;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return AppCustomButton(
         contentPadding: EdgeInsets.all(10.r),
         borderColor: AppColors.primary,
+        onPressed: onPressed,
         child: Row(
           spacing: 5.w,
           children: [
@@ -46,7 +49,6 @@ class _ListItem extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        onPressed: () {});
+        ));
   }
 }

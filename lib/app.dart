@@ -51,8 +51,8 @@ class AsaapApp extends StatelessWidget {
                     return MaterialApp.router(
                       onGenerateTitle: (context) => S.of(context).appName,
                       locale: state.locale,
-                      darkTheme: appTheme(),
-                      theme: appTheme(),
+                      darkTheme: darkTheme(),
+                      theme: lightTheme(),
                       themeMode: authState.themeMode,
                       routerConfig: _appRouter.config(),
                       builder: (BuildContext context, Widget? child) =>

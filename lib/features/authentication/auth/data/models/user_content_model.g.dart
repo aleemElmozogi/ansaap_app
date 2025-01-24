@@ -8,18 +8,16 @@ part of 'user_content_model.dart';
 
 UserContentModel _$UserContentModelFromJson(Map<String, dynamic> json) =>
     UserContentModel(
-      userName: json['fullName'] as String? ?? '',
+      fullName: json['fullName'] as String? ?? '',
       userEmail: json['email'] as String? ?? '',
-      profileImageUrl: json['imageUrl'] as String? ?? '',
       phoneNumber: json['phoneNumber'] as String? ?? '',
-      walletTotal: json['walletTotal'] as num? ?? 0,
+      userName: json['userName'] as String? ?? '',
     );
 
 Map<String, dynamic> _$UserContentModelToJson(UserContentModel instance) =>
     <String, dynamic>{
-      'fullName': instance.userName,
+      'fullName': instance.fullName,
+      'userName': instance.userName,
       'email': instance.userEmail,
-      'imageUrl': instance.profileImageUrl,
       'phoneNumber': instance.phoneNumber,
-      'walletTotal': instance.walletTotal,
     };

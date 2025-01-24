@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       AppTextFormField(
                         name: 'userName',
-                        validator: InputValidation.emailValidation(),
+                        validator: InputValidation.userName(),
                         labelText: 'إسم المستخدم',
                         maxLength: 9,
                       ),
@@ -69,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                         isPassword: true,
                         labelText: 'كلمة المرور',
                         prefixIcon: Icons.lock_rounded,
+                        maxLines: 1,
                       ),
                       SizedBox(height: 25.h),
                       _SignInButton(formKey: _formKey),
@@ -117,10 +118,10 @@ class LoginScreen extends StatelessWidget {
 }
 
 extension on FormBuilderState {
-  ({String phone, String password})? get input {
-    final phone = value['phone'] as String?;
+  ({String userName, String password})? get input {
+    final userName = value['userName'] as String?;
     final password = value['password'] as String?;
-    if (phone == null || password == null) return null;
-    return (phone: phone, password: password);
+    if (userName == null || password == null) return null;
+    return (userName: userName, password: password);
   }
 }

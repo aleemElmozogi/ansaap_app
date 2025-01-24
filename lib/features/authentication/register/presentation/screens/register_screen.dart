@@ -112,7 +112,7 @@ extension on FormBuilderState {
       return null;
     }
     return (
-      userName: userName,
+    userName: userName,
       password: password,
       email: email ?? '',
       fullName: fullName ?? '',

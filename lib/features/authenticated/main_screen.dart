@@ -1,3 +1,4 @@
+import 'package:ansaap_app/features/authenticated/viewFamilies/presentation/cubit/view_families_cubit.dart';
 import 'package:ansaap_app/features/authentication/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ansaap_app/features/authentication/auth/presentation/cubit/auth_state.dart';
 import 'package:auto_route/auto_route.dart';
@@ -31,47 +32,68 @@ class MainScreen extends StatelessWidget {
           tabsRouter.current.title;
           return AppScaffold(
               title: taps[tabsRouter.activeIndex]['title'].toString(),
+              providersList: [  BlocProvider<ViewFamiliesCubit>(
+                create: (context) => di.getIt<ViewFamiliesCubit>(),
+              ),],
               drawer: Drawer(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    DrawerHeader(
-                      decoration: BoxDecoration(),
-                      child: AppText(
-                        'أَنْسَابْ',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20.sp,
-                        textColor: AppColors.primary,
-                      ),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.nightlight_outlined),
-                      title: AppText(
-                        'الوضع الليلي',
-                        textAlign: TextAlign.start,
-                      ),
-                      trailing: BlocBuilder<AuthCubit, AuthState>(
-                        buildWhen: (previous, current) =>
-                            previous.themeMode != current.themeMode,
-                        builder: (context, state) {
-                          return Switch(
-                            value: state.themeMode == ThemeMode.dark,
-                            onChanged: (value) =>
-                                context.read<AuthCubit>().swishAppThemeMode(),
-                          );
-                        },
-                      ),
-                      onTap: context.read<AuthCubit>().swishAppThemeMode,
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.logout_outlined),
-                      title: AppText(
-                        'تسجيل الخروج',
-                        textAlign: TextAlign.start,
-                      ),
-                      onTap: context.read<AuthCubit>().logOut,
-                    ),
-                  ],
+                child: BlocBuilder<AuthCubit, AuthState>(
+                  buildWhen: (previous, current) =>
+                      previous.authState != current.authState,
+                  builder: (context, state) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DrawerHeader(
+                          decoration: BoxDecoration(),
+                          child: AppText(
+                            'أَنْسَابْ',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20.sp,
+                            textColor: AppColors.primary,
+                          ),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.nightlight_outlined),
+                          title: AppText(
+                            'الوضع الليلي',
+                            textAlign: TextAlign.start,
+                          ),
+                          trailing: BlocBuilder<AuthCubit, AuthState>(
+                            buildWhen: (previous, current) =>
+                                previous.themeMode != current.themeMode,
+                            builder: (context, state) {
+                              return Switch(
+                                value: state.themeMode == ThemeMode.dark,
+                                onChanged: (value) => context
+                                    .read<AuthCubit>()
+                                    .swishAppThemeMode(),
+                              );
+                            },
+                          ),
+                          onTap: context.read<AuthCubit>().swishAppThemeMode,
+                        ),
+                        if (state.authState.isAuthenticated)
+                          ListTile(
+                            leading: const Icon(Icons.logout_outlined),
+                            title: AppText(
+                              'تسجيل الخروج',
+                              textAlign: TextAlign.start,
+                            ),
+                            onTap: context.read<AuthCubit>().logOut,
+                          ),
+                        if (state.authState.isUnAuthenticated)
+                          ListTile(
+                            leading: const Icon(Icons.login),
+                            title: AppText(
+                              'العودة لتسجيل الدخول',
+                              textAlign: TextAlign.start,
+                            ),
+                            onTap: () =>
+                                context.router.replaceAll([LoginRoute()]),
+                          ),
+                      ],
+                    );
+                  },
                 ),
               ),
               safeTopArea: true,
