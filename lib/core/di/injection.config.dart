@@ -73,7 +73,6 @@ import '../api/api_consumer_prod_impl.dart' as _i1030;
 import '../api/api_helper.dart' as _i242;
 import '../localStorage/loacal_storage.dart' as _i198;
 import '../network/network_info.dart' as _i932;
-import '../services/fcm_service.dart' as _i928;
 
 const String _mock = 'mock';
 const String _prod = 'prod';
@@ -99,8 +98,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i776.DioConsumerMockImpl(gh<_i932.NetworkInfo>()),
       registerFor: {_mock},
     );
-    gh.lazySingleton<_i928.FcmService>(
-        () => _i928.FcmService(gh<_i892.FirebaseMessaging>()));
     gh.lazySingleton<_i1036.FcmService>(
         () => _i1036.FcmService(gh<_i892.FirebaseMessaging>()));
     gh.lazySingleton<_i1061.NotificationsRepository>(

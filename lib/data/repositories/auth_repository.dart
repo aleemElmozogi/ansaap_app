@@ -54,9 +54,7 @@ class AuthRepositoryImpl extends BaseRepository implements AuthRepository {
                 'userName': 'ahmed_99',
                 'fullName': 'احمد خالد جمعة',
                 'email': 'ahmed@gmail.com',
-                'imageUrl': 'imageUrl',
                 'phoneNumber': 'phoneNumber',
-                'walletTotal': 24899,
               }
             }
           }),

@@ -52,7 +52,7 @@ class InquiriesRepositoryImpl extends BaseRepository
                 },
                 "familyName": "Family 1",
                 "familyId": 1,
-              }
+              },
             ]
           }),
       onSuccess: (response) async {

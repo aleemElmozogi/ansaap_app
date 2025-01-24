@@ -1,4 +1,3 @@
-import 'package:ansaap_app/core/enums/account_type.dart';
 import 'package:ansaap_app/core/models/json_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_content_model.g.dart';
