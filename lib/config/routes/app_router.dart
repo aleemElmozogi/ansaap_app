@@ -1,3 +1,4 @@
+import 'package:ansaap_app/features/authenticated/familyTree/presentation/screens/family_tree_screen.dart';
 import 'package:ansaap_app/features/authenticated/home/presentation/screens/home_screen.dart';
 import 'package:ansaap_app/features/authenticated/profile/presentation/screens/profile_screen.dart';
 import 'package:ansaap_app/features/authentication/resetPassword/presentation/screens/reset_password_screen.dart';
@@ -46,6 +47,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: PhoneInputRoute.page),
     AutoRoute(page: OtpInputRoute.page),
     AutoRoute(page: ResetPasswordRoute.page),
+    AutoRoute(page: FamilyTreeRoute.page),
 
     AutoRoute(page: MainRoute.page, children: [
       AutoRoute(page: HomeRoute.page),

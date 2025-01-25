@@ -6,7 +6,7 @@ import 'package:ansaap_app/features/authenticated/sendSuggestion/presentation/cu
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton()
+@Injectable()
 class SendSuggestionCubit extends Cubit<SendSuggestionState> {
   final SendSuggestionUsecase _sendSuggestionUsecase;
 

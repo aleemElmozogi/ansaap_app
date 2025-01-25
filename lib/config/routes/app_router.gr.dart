@@ -10,6 +10,25 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [FamilyTreeScreen]
+class FamilyTreeRoute extends PageRouteInfo<void> {
+  const FamilyTreeRoute({List<PageRouteInfo>? children})
+      : super(
+          FamilyTreeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FamilyTreeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const FamilyTreeScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

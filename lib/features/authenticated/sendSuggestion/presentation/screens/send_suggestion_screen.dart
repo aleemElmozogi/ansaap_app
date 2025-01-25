@@ -39,16 +39,21 @@ class SendSuggestionScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 20,
               children: [
+                SizedBox(height: 5.h),
+
                 AppText('أدخل اقتراحك',
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 ),
+                SizedBox(height: 2.h),
+
                 AppTextFormField(
                   name: 'suggestion',
                   validator: InputValidation.requiredValidation(),
                   maxLines: 10,
                 ),
                 _SendSuggestionButton(formKey: _formKey,),
+
               ],
             ),
           ),

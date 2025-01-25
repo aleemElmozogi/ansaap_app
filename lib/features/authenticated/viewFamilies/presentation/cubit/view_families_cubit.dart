@@ -7,7 +7,7 @@ import 'package:ansaap_app/features/authenticated/viewFamilies/presentation/cubi
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton()
+@Injectable()
 class ViewFamiliesCubit extends Cubit<ViewFamiliesState> {
   final FetchCitiesUsecase _fetchCitiesUsecase;
   final FetchFamiliesUsecase _fetchFamiliesUsecase;

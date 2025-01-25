@@ -1,3 +1,4 @@
+import 'package:ansaap_app/config/routes/app_router.dart';
 import 'package:ansaap_app/core/utils/app_colors.dart';
 import 'package:ansaap_app/core/utils/assets_manager.dart';
 import 'package:ansaap_app/core/utils/dialog_extension.dart';
@@ -36,7 +37,9 @@ class HomeScreen extends StatelessWidget {
               description:
                   'قم بإضافة شجرة عائلتك وتنظيم أفرادها لعرض تاريخ العائلة بشكل مرتب.',
               vector: ImgAssets.treeVector,
-              onPressed: () {},
+              onPressed: () {
+                context.router.push(FamilyTreeRoute());
+              },
             ),
             _ListItem(
               title: 'عرض العائلات',
@@ -52,12 +55,20 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       spacing: 10,
                       children: [
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: BackButton()
+                        Row(
+                          spacing: 10,
+                          children: [
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: BackButton()),
+                            AppText(
+                              'قائمة العائلات',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.sp,
+                            ),
+                          ],
                         ),
-                        Expanded(
-                            child: FamiliesView()),
+                        Expanded(child: FamiliesView()),
                       ],
                     ),
                   ),
@@ -87,9 +98,9 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 context.showAppBottomSheet(
                     child: SizedBox(
-                      height: .55.sh,
-                      child: SendSuggestionScreen(),
-                    ));
+                  height: .57.sh,
+                  child: SendSuggestionScreen(),
+                ));
               },
             ),
           ],
@@ -98,4 +109,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTextFormField extends StatefulWidget {
   final String name;
   final bool isPassword;
+  final bool enabled;
   final Function(String)? onChanged;
   final int? maxLength;
   final int? maxLines;
@@ -21,6 +22,7 @@ class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
     required this.name,
     this.isPassword = false,
+    this.enabled = true,
     this.labelText,
     this.hintText,
     this.maxLines,
@@ -57,6 +59,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             initialValue: widget.initalValue,
             validator: widget.validator,
             maxLines: widget.maxLines,
+            enabled: widget.enabled,
             onChanged: (v) {
               if (widget.onChanged != null) {
                 widget.onChanged!(v ?? '');
