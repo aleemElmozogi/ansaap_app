@@ -11,10 +11,19 @@ part of 'app_router.dart';
 
 /// generated route for
 /// [FamilyTreeScreen]
-class FamilyTreeRoute extends PageRouteInfo<void> {
-  const FamilyTreeRoute({List<PageRouteInfo>? children})
-      : super(
+class FamilyTreeRoute extends PageRouteInfo<FamilyTreeRouteArgs> {
+  FamilyTreeRoute({
+    Key? key,
+    int? familyId,
+    String? familyName,
+    List<PageRouteInfo>? children,
+  }) : super(
           FamilyTreeRoute.name,
+          args: FamilyTreeRouteArgs(
+            key: key,
+            familyId: familyId,
+            familyName: familyName,
+          ),
           initialChildren: children,
         );
 
@@ -23,9 +32,34 @@ class FamilyTreeRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const FamilyTreeScreen();
+      final args = data.argsAs<FamilyTreeRouteArgs>(
+          orElse: () => const FamilyTreeRouteArgs());
+      return FamilyTreeScreen(
+        key: args.key,
+        familyId: args.familyId,
+        familyName: args.familyName,
+      );
     },
   );
+}
+
+class FamilyTreeRouteArgs {
+  const FamilyTreeRouteArgs({
+    this.key,
+    this.familyId,
+    this.familyName,
+  });
+
+  final Key? key;
+
+  final int? familyId;
+
+  final String? familyName;
+
+  @override
+  String toString() {
+    return 'FamilyTreeRouteArgs{key: $key, familyId: $familyId, familyName: $familyName}';
+  }
 }
 
 /// generated route for

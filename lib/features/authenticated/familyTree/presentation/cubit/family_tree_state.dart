@@ -15,6 +15,7 @@ class FamilyTreeState with _$FamilyTreeState {
     @Default('') String message,
     @Default(0) int familyId,
     @Default(CallStatus.pure) CallStatus fetchFamilyTreeStatus,
+    @Default(CallStatus.pure) CallStatus addFamilyMemberStatus,
    FamilyTreeContentModel? familyTreeContentModel,
   }) = _FamilyTreeState;
 

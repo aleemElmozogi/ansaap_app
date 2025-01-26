@@ -36,6 +36,8 @@ import '../../data/usecases/notifications/subscribe_topic_usecase.dart'
     as _i794;
 import '../../data/usecases/notifications/unsubscribe_topic_usecase.dart'
     as _i500;
+import '../../features/authenticated/familyTree/domain/usecases/add_family_member_usecase.dart'
+    as _i766;
 import '../../features/authenticated/familyTree/domain/usecases/fetch_family_tree_usecase.dart'
     as _i1047;
 import '../../features/authenticated/familyTree/presentation/cubit/family_tree_cubit.dart'
@@ -202,17 +204,24 @@ extension GetItInjectableX on _i174.GetIt {
           inquiriesRepository: gh<_i325.InquiriesRepository>(),
           networkInfo: gh<_i932.NetworkInfo>(),
         ));
+    gh.lazySingleton<_i766.AddFamilyMemberUsecase>(
+        () => _i766.AddFamilyMemberUsecase(
+              inquiriesRepository: gh<_i325.InquiriesRepository>(),
+              networkInfo: gh<_i932.NetworkInfo>(),
+            ));
     gh.factory<_i258.LocaleCubit>(() => _i258.LocaleCubit(
           getSavedLangUseCase: gh<_i586.GetSavedLangUseCase>(),
           changeLangUseCase: gh<_i92.ChangeLangUseCase>(),
         ));
-    gh.factory<_i609.FamilyTreeCubit>(
-        () => _i609.FamilyTreeCubit(gh<_i1047.FetchFamilyTreeUsecase>()));
     gh.factory<_i947.SendSuggestionCubit>(
         () => _i947.SendSuggestionCubit(gh<_i494.SendSuggestionUsecase>()));
     gh.factory<_i738.ViewFamiliesCubit>(() => _i738.ViewFamiliesCubit(
           gh<_i499.FetchFamiliesUsecase>(),
           gh<_i1027.FetchCitiesUsecase>(),
+        ));
+    gh.factory<_i609.FamilyTreeCubit>(() => _i609.FamilyTreeCubit(
+          gh<_i1047.FetchFamilyTreeUsecase>(),
+          gh<_i766.AddFamilyMemberUsecase>(),
         ));
     return this;
   }

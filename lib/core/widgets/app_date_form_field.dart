@@ -39,15 +39,14 @@ class _AppDateFormFieldState extends State<AppDateFormField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.labelText != null) AppText(widget.labelText ?? ''),
-
           FormBuilderDateTimePicker(
             controller: widget.controller,
             name: widget.name,
             inputType: InputType.date,
-            initialDate: widget.lastDate??DateTime.now(),
-            firstDate:widget.firstDate?? DateTime(1950),
-            lastDate:widget.lastDate??DateTime.now(),
-            validator: (value) => widget.validator!(value.toString()),
+            initialDate: widget.lastDate ?? DateTime.now(),
+            firstDate: widget.firstDate ?? DateTime(1950),
+            lastDate: widget.lastDate ?? DateTime.now(),
+            validator: (value) => widget.validator != null?(value.toString()):null,
             decoration: InputDecoration(
               labelStyle: const TextStyle(color: AppColors.grey),
               filled: true,

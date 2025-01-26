@@ -1,3 +1,4 @@
+import 'package:ansaap_app/config/routes/app_router.dart';
 import 'package:ansaap_app/core/utils/app_colors.dart';
 import 'package:ansaap_app/core/widgets/app_search_field.dart';
 import 'package:ansaap_app/core/widgets/app_text.dart';
@@ -5,6 +6,7 @@ import 'package:ansaap_app/core/widgets/loading_indicator.dart';
 import 'package:ansaap_app/features/authenticated/viewFamilies/data/models/families_content_model.dart';
 import 'package:ansaap_app/features/authenticated/viewFamilies/presentation/cubit/view_families_cubit.dart';
 import 'package:ansaap_app/features/authenticated/viewFamilies/presentation/cubit/view_families_state.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,7 +109,14 @@ class FamiliesView extends StatelessWidget {
                     physics: const BouncingScrollPhysics(
                         parent: AlwaysScrollableScrollPhysics()),
                     itemBuilder: (context, index) {
-                      return FamilyListItem(family: families[index]);
+                      return InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            context.router.push(FamilyTreeRoute(
+                                familyId: families[index].familyId,
+                                familyName: families[index].familyName));
+                          },
+                          child: FamilyListItem(family: families[index]));
                     },
                   );
                 },
